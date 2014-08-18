@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    var object =
+
     window.day2 = {
         //Napisz funckje przyjmująca 3 parametry która z tych parametrów będzie tworzyć obiekt.
 
