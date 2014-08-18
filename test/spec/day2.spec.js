@@ -33,11 +33,49 @@
         });
     });
 
-    describe("addPropertiesToObjectCheckNumber", function () {
+    describe("f2", function () {
         iit('Factorial ', function () {
             expect(answer.f2(6).toEqual('6!'));
+
         });
     });
+
+    describe("choice", function () {
+        iit('wybor ', function () {
+            expect(answer.choice(1).toEqual('Podales 1'));
+        });
+    });
+    describe("array", function () {
+        iit('array 4  ', function () {
+            expect(answer.array([4, 3, 2, 1]).toEqual([4, 3, 2, 1]));
+        });
+    });
+
+    describe("tabX", function () {
+        iit('Pomnoz tablice przez 2, wynik zapisz w drogiej tablicy  ', function () {
+            expect(answer.tabX(4, 6, 2, 1).toEqual(8, 12, 4, 2));
+        });
+    });
+
+    describe("warning", function () {
+        iit('statement ', function () {
+            expect(answer.warning("psa").toEqual('Uwaga na psa !!!'));
+        });
+    });
+
+    describe("evenNumbers", function () {
+        iit('parzyste liczby ', function () {
+            expect(answer.evenNumbers(11).toEqual('Numer 11 jest nieparzysty!'));
+        });
+    });
+
+
+
+
+
+
+
+
 
 
 })();
