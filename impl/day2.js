@@ -9,7 +9,7 @@
 
         createArrayObject: function (obj1, obj2, obj3) {
             var obj = {property1: obj1, property2: obj2, property3: obj3};
-            console.log(obj);
+
             return obj;
         },
 
@@ -59,8 +59,6 @@
         addPropertiesToObjectCheckNumber: function (object, nameProperties, value) {
             object[nameProperties] = value;
             return object;
-
-
 
 
         }
