@@ -155,6 +155,39 @@
 
     }
 
+
+// Napisz konstruktor tworzacy obiekty studentow. Maja posiadac imie i nazwisko, wiek, i pusta tablice na oceny. Utworz trzy egzemplarze (student1, student2, student3)
+    var Student = function (name, age) {
+        this.name = name;
+        this.age = age;
+        this.marks = [];
+    };
+    // Dopisz prototyp dodajacy do tablicy oceny i zwracajacy je.
+    Student.prototype = {
+        addMark: function (mark) {
+            if ("number" == typeof mark && 2 <= mark && 5 >= mark) {
+                this.marks.push(mark);
+            }
+            else if ("[object Array]" == Object.prototype.toString.call(mark)) {
+                for (var i = 0; i < mark.length; i++) {
+                    if ("number" == typeof mark[i] && 2 <= mark[i] && 5 >= mark[i]) {
+                        this.marks.push(mark[i]);
+                    }
+                }
+            }
+
+            return this.marks;
+        },
+        // Dopisz prototyp liczacy srednia ze wszystkich ocen z dokladnoscia dwoch miejsc po przecinku i zwracajaca ja
+        average: function () {
+            var sum = 0;
+            for (var i = 0; i < this.marks.length; i++) {
+                sum += this.marks[i];
+            }
+            return Math.round(sum / this.marks.length * 100) / 100;
+        }
+    };
+
     window.day4 = {
         mbox1: new Boxes(10, 10, 10),
         mbox2: new Boxes(15, 30, 40),
@@ -174,6 +207,27 @@
         box2: new Box(2, 3, 4, 5),
         box3: new Box(3, 9, 8, 7),
         box4: new Box(4, 6, 5, 4),
-        box5: new Box("a", "b", 2, 9)
+        box5: new Box("a", "b", 2, 9),
+
+        student1: new Student("Dawid Zegar", 23),
+        student2: new Student("Jan Kowalski", 77),
+        student3: new Student("Jacek Nowak", 34),
+
+        // Napisz funkcje przyjmujaca jako argument tablice elementow typu Student. Funkcja wybiera studenta z najlepsza srednia i zwraca go.
+        getBestStudent: function (students) {
+
+            var iBest = 0;
+            var best = students[iBest].average();
+
+            for (var i = 0; i < students.length; i++) {
+                if (isNaN(students[i].average())) {
+                    return false;
+                }
+                if (best < students[i].average()) {
+                    iBest = i;
+                }
+            }
+            return students[iBest];
+        }
     };
 })();
