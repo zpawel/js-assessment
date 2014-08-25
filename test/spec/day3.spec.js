@@ -1,69 +1,122 @@
 (function () {
-    var answer = window.day3;
+    describe('day3', function () {
+        var answer = window.day3;
 
-    describe('book.delProperty', function () {
-        it('should return book without numPages', function () {
-            expect(answer.book.delProperty("numPages")).toEqual({title: "Kot w butach", author: "Jan Kowalski", comments: "Good book!", delProperty: jasmine.any(Function)});
+        describe('book.delProperty', function () {
+            it('should return book without numPages', function () {
+                expect(answer.book.delProperty("numPages")).toEqual({title: "Kot w butach", author: "Jan Kowalski", comments: "Good book!", delProperty: jasmine.any(Function)});
+            });
+            it('should answer undefined for request numPages', function () {
+                expect(answer.book.delProperty("numPages").numPages).toEqual(undefined);
+            });
+
+
         });
-        it('should answer undefined for request numPages', function () {
-            expect(answer.book.delProperty("numPages").numPages).toEqual(undefined);
+
+
+        describe('propertyNames', function () {
+            it('should array of property names and values', function () {
+                expect(answer.propertyNames({name: "Jan", age: 34})).toEqual([
+                    ["name", "Jan"],
+                    ["age", 34]
+                ]);
+            });
+            it('should array of indeks and values', function () {
+                expect(answer.propertyNames({item: 'book', comment: 'sample string'})).toEqual([
+                    [ 'item', 'book' ],
+                    [ 'comment', 'sample string' ]
+                ]);
+            });
+
+
+        });
+        describe('mergeObject', function () {
+            it('should return one object cointins all atributes', function () {
+                expect(answer.mergeObject({name: "Jan", age: 34}, {title: "Kot w butach", comments: "Good book!"})).toEqual({ name: 'Jan', age: 34, title: 'Kot w butach', comments: 'Good book!' });
+            });
+            it("should return false if any arguement are string", function () {
+                expect(answer.mergeObject({name: "Jan", age: 34}, "ala")).toBeFalsy();
+            });
+            it("should return false if any arguement are boolean", function () {
+                expect(answer.mergeObject(true, {title: "Kot w butach", comments: "Good book!"})).toBeFalsy();
+            });
+
+
+        });
+        describe('countVowes', function () {
+            it("should return 4", function () {
+                expect("String Testowy".countVowels()).toEqual(4);
+            });
+            it("should return 0 for empty string", function () {
+                expect("".countVowels()).toEqual(0);
+            });
+
+        });
+        describe('arrayToString', function () {
+            it("should return 'raz dwa trzy'", function () {
+                expect(["raz", "dwa", "trzy"].arrayToString()).toEqual("raz dwa trzy");
+            });
+            it("should return 'raz 2 trzy 4'", function () {
+                expect(["raz", 2, "trzy", 4].arrayToString()).toEqual("raz 2 trzy 4");
+            });
+            it("should return 'false 0 1 2'", function () {
+                expect([false, 0, 1, 2].arrayToString()).toEqual("false 0 1 2");
+            });
+
+
+        });
+        describe('countPropertiesInObject', function () {
+            it('Should return count properties in object', function () {
+                    expect(answer.countPropertiesInObject(answer.aqurium, 'fish')).toEqual(5);
+                    expect(answer.countPropertiesInObject(answer.aqurium, 'tree')).toEqual(6);
+                    expect(answer.countPropertiesInObject(answer.aqurium, 'stone')).toEqual(1);
+                }
+            );
+        });
+        describe('writeAllPropertiesObject', function () {
+            it("Should return all name properties in object", function () {
+                expect(answer.writeAllPropertiesObject(answer.aqurium)).toEqual(['fish1', 'fish2', 'fish3', 'fish4', 'fish5',
+                    'aqurine', 'underwaterTree1', 'underwaterTree2', 'underwaterTree3', 'underwaterTree4', 'underwaterTree5', 'underwaterTree6', 'stone1', 'stone' ]);
+                expect(answer.writeAllPropertiesObject(answer.aqurium2)).toEqual([ 'something', 'width', 'height', 'capacity' ]);
+                expect(answer.writeAllPropertiesObject(answer.test)).toEqual([ 'properties'  ]);
+            });
         });
 
+        describe("countCharInProperties", function () {
+            it('Should return value exist a letter in name properties', function () {
+                expect(answer.countCharInProperties(answer.aqurium, 'a')).toEqual(7);
+                expect(answer.countCharInProperties(answer.aqurium, 'b')).toEqual(0);
+                expect(answer.countCharInProperties(answer.aqurium, 'f')).toEqual(5);
+                expect(answer.countCharInProperties(answer.aqurium, 's')).toEqual(7);
+                expect(answer.countCharInProperties(answer.aqurium, 'e')).toEqual(27);
+                expect(answer.countCharInProperties(answer.aqurium, 't')).toEqual(14);
+            });
+        });
 
+        describe("Number.prototype.addNumber", function () {
+            it('Should return added two numbers', function () {
+                var temp = 123;
+                expect(temp.addNumber(5)).toEqual(128);
+                expect(temp.addNumber(10)).toEqual(133);
+                expect(temp.addNumber(13)).toEqual(136);
+                expect(temp.addNumber(12)).toEqual(135);
+                expect(temp.addNumber(1654)).toEqual(1777);
+                expect(temp.addNumber(1645)).toEqual(1768);
+                expect(temp.addNumber(965)).toEqual(1088);
+
+            });
+        });
+
+        describe("Number.prototype.maxValueFromTwoArguments", function () {
+            it('Should return max value from two arguments and this', function () {
+                var temp = 123;
+                expect(temp.maxValueFromTwoArguments(1, 200)).toEqual(200);
+                expect(temp.maxValueFromTwoArguments(1000, 22)).toEqual(1000);
+                expect(temp.maxValueFromTwoArguments(213, 22)).toEqual(213);
+                expect(temp.maxValueFromTwoArguments(321, 2234)).toEqual(2234);
+                expect(temp.maxValueFromTwoArguments(42, 21)).toEqual(temp);
+                expect(temp.maxValueFromTwoArguments(34525, 213)).toEqual(34525);
+            });
+        });
     });
-
-
-    describe('propertyNames', function () {
-        it('should array of property names and values', function () {
-            expect(answer.propertyNames({name: "Jan", age: 34})).toEqual([
-                ["name", "Jan"],
-                ["age", 34]
-            ]);
-        });
-        it('should array of indeks and values', function () {
-            expect(answer.propertyNames({item: 'book', comment: 'sample string'})).toEqual([
-                [ 'item', 'book' ],
-                [ 'comment', 'sample string' ]
-            ]);
-        });
-
-
-    });
-    describe('mergeObject', function () {
-        it('should return one object cointins all atributes', function () {
-            expect(answer.mergeObject({name: "Jan", age: 34}, {title: "Kot w butach", comments: "Good book!"})).toEqual({ name: 'Jan', age: 34, title: 'Kot w butach', comments: 'Good book!' });
-        });
-        it("should return false if any arguement are string", function () {
-            expect(answer.mergeObject({name: "Jan", age: 34}, "ala")).toBeFalsy();
-        });
-        it("should return false if any arguement are boolean", function () {
-            expect(answer.mergeObject(true, {title: "Kot w butach", comments: "Good book!"})).toBeFalsy();
-        });
-
-
-    });
-    describe('countVowes', function () {
-        it("should return 4", function () {
-            expect("String Testowy".countVowels()).toEqual(4);
-        });
-        it("should return 0 for empty string", function () {
-            expect("".countVowels()).toEqual(0);
-        });
-
-    });
-    describe('arrayToString', function () {
-        it("should return 'raz dwa trzy'", function () {
-            expect(["raz", "dwa", "trzy"].arrayToString()).toEqual("raz dwa trzy");
-        });
-        it("should return 'raz 2 trzy 4'", function () {
-            expect(["raz", 2, "trzy", 4].arrayToString()).toEqual("raz 2 trzy 4");
-        });
-        it("should return 'false 0 1 2'", function () {
-            expect([false, 0, 1, 2].arrayToString()).toEqual("false 0 1 2");
-        });
-
-
-    });
-
-
 })();
