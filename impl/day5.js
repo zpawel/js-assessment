@@ -107,7 +107,68 @@
                     return availableWeapon;
                 }
             };
-        })()
+        })(),
+
+        PetrolStation: function () {
+            var gasoline95;
+            var gasoline98;
+            var oil;
+            // Do podanego obiektu stworz metody manipulujace danymi prywatnymi: setFuel, getFuel modifyFuel o argumentach ( choose, liters )
+            return {
+                setFuel: function (choose, liters) {
+                    switch (choose) {
+                        case "gasoline95":
+                            gasoline95 = liters;
+                            break;
+                        case "gasoline98":
+                            gasoline98 = liters;
+                            break;
+
+                        case "oil":
+                            oil = liters;
+                            break;
+                    }
+
+                },
+                getFuel: function (choose) {
+                    switch (choose) {
+                        case "gasoline95":
+                            return gasoline95;
+                        case "gasoline98":
+                            return gasoline98;
+
+                        case "oil":
+                            return oil;
+                    }
+
+                },
+                modifyFuel: function (choose, liters) {
+                    switch (choose) {
+                        case "gasoline95":
+                            gasoline95 += liters;
+                            break;
+                        case "gasoline98":
+                            gasoline98 += liters;
+                            break;
+
+                        case "oil":
+                            oil += liters;
+                            break;
+
+                    }
+
+                },
+                // napisz funkcje przyjmujaca  3 argumenty reprezentujace kolejno ilosc tankowanego paliwa (95, 98, diesel) zwracajaca koszt wedlug cen (5.35, 5:56, 5,61), funkcja ma zmniejszasc ilosc paliwa na stacji
+                tankFuel: function (gas95, gas98, oill) {
+                    this.modifyFuel("gasoline95", -gas95);
+                    this.modifyFuel("gasoline98", -gas98);
+                    this.modifyFuel("oil", -oill);
+                    return Math.round((gas95 * 5.35 + gas98 * 5.56 + oill * 5.61) * 100) / 100;
+
+
+                }
+            };
+        }()
     }
 
 })();

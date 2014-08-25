@@ -107,5 +107,46 @@ describe('day5', function () {
 
     });
 
+    describe('PetrolStation. set get Fuel', function () {
+        beforeEach(function () {
+            answer.PetrolStation.setFuel("gasoline95", 1873);
+            answer.PetrolStation.setFuel("gasoline98", 765);
+            answer.PetrolStation.setFuel("oil", 4485);
+
+        });
+
+        it('should return correct amount of fuel', function () {
+            expect(answer.PetrolStation.getFuel("oil")).toEqual(4485);
+            expect(answer.PetrolStation.getFuel("gasoline95")).toEqual(1873);
+            answer.PetrolStation.setFuel("gasoline95", 2340);
+            expect(answer.PetrolStation.getFuel("gasoline95")).toEqual(2340);
+            expect(answer.PetrolStation.getFuel("gasoline98")).toEqual(765);
+        });
+    });
+    describe('PetrolStation.tankFuel', function () {
+        beforeEach(function () {
+            answer.PetrolStation.setFuel("gasoline95", 1873);
+            answer.PetrolStation.setFuel("gasoline98", 765);
+            answer.PetrolStation.setFuel("oil", 4485);
+
+        });
+
+        it('should return cost of fuel', function () {
+            expect(answer.PetrolStation.tankFuel(10, 0, 0)).toEqual(53.5);
+            expect(answer.PetrolStation.tankFuel(0, 0, 0)).toEqual(0);
+            expect(answer.PetrolStation.tankFuel(0, 12, 7)).toEqual(105.99);
+            expect(answer.PetrolStation.tankFuel(1, 1, 1)).toEqual(16.52);
+
+        });
+        it('should return cost of fuel and change amount of fuel', function () {
+            expect(answer.PetrolStation.getFuel("gasoline98")).toEqual(765);
+            expect(answer.PetrolStation.tankFuel(0, 2, 0)).toEqual(11.12);
+            expect(answer.PetrolStation.getFuel("gasoline98")).toEqual(763);
+            expect(answer.PetrolStation.tankFuel(99, 0, 123)).toEqual(1219.68);
+            expect(answer.PetrolStation.getFuel("gasoline95")).toEqual(1774);
+
+        });
+    });
+
 
 });
