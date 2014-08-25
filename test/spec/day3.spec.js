@@ -118,5 +118,77 @@
                 expect(temp.maxValueFromTwoArguments(34525, 213)).toEqual(34525);
             });
         });
+        describe('getWidth', function () {
+            it('should return array of width', function () {
+                expect(answer.getWidth(answer.boxlist)).toEqual(["box1: 5", "box2: 2", "box3: 7"]);
+
+            });
+
+            it('should return empty array if list is empty', function () {
+                expect(answer.getWidth({})).toEqual([]);
+            });
+        });
+
+        describe('getVolume', function () {
+            it('should return volume of boxes in string array, last element should be sum of all volumes saved as number', function () {
+                expect(answer.getVolume(answer.boxlist)).toEqual(["box1 volume: 250", "box2 volume: 98", "box3 volume: 350", 698]);
+            });
+
+        });
+
+        describe('getMaxVolume', function () {
+            it('should max volume from array contains boxes', function () {
+                expect(answer.getMaxVolume(answer.boxlist)).toEqual(350);
+            });
+        });
+
+        describe('changePropertyName', function () {
+            var propNamesBefore = [];
+            var propNamesAfter = [];
+            beforeEach(function () {
+
+                for (var ele in answer.person) {
+                    propNamesBefore.push(ele);
+                }
+                answer.changePropertyName(answer.person, "age", "newAge");
+                for (var ele in answer.person) {
+                    propNamesAfter.push(ele);
+                }
+            });
+            afterEach(function () {
+                propNamesBefore = [];
+                propNamesAfter = [];
+            });
+
+            it('should change property name in object', function () {
+                expect(propNamesAfter).not.toEqual(propNamesBefore);
+            });
+
+            it('should change property age to newAge', function () {
+                expect(propNamesAfter).toEqual(["firstName", "secondName", "newAge"]);
+            });
+
+            it('should return false if property not exist', function () {
+                expect(answer.changePropertyName(answer.person), "height", "width").toBe(false);
+            });
+        });
+
+        describe('makeObject', function () {
+            it('should make object from 2D array', function () {
+                expect(answer.makeObject([
+                    ["name", "first"],
+                    ["type", 1],
+                    ["mode", "normal"]
+                ])).toEqual({name: "first", type: 1, mode: "normal"});
+            });
+
+            it('should return false if second dimension is not 2', function () {
+                expect(answer.makeObject([
+                    ["name", "first"],
+                    ["type", 1, 3],
+                    ["mode", "normal"]
+                ])).toBe(false);
+            });
+        });
     });
 })();

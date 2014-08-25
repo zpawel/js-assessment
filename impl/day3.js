@@ -139,6 +139,80 @@
                 }
             }
             return temp;
+        },
+        //Napisz funckje wypisujacą atrybut width z nazwa box'a do którego należy
+        boxlist: {box1: {height: 10, width: 5, length: 5}, box2: {height: 7, width: 2, length: 7}, box3: {height: 5, width: 7, length: 10}},
+
+        getWidth: function (list) {
+            var tmp = [];
+            for (var element in list) {
+                tmp.push(element + ": " + list[element].width);
+            }
+            return tmp;
+        },
+
+        //Napisz funkcje licząca objętość dla kazdego box'a a nastepnie sume wszystkich objętości
+        getVolume: function (list) {
+            var tmp = [];
+            var sumVolume = 0;
+            var volume;
+            for (var element in list) {
+                volume = (list[element]["width"] * list[element]["height"] * list[element]["length"]);
+                tmp.push(element + " volume: " + volume);
+                sumVolume += volume;
+            }
+            tmp.push(sumVolume);
+            return tmp;
+
+        },
+
+        //Napisz funkcje zwracajacą maksymalna objetosc box'a
+        getMaxVolume: function (list) {
+            var tmp = [];
+            var max;
+            var volume;
+            for (var element in list) {
+                volume = (list[element]["width"] * list[element]["height"] * list[element]["length"]);
+                tmp.push(volume);
+            }
+            max = tmp[0];
+            for (var i = 0; i < tmp.length; i++) {
+                if (max < tmp[i]) {
+                    max = tmp[i];
+                }
+            }
+            return max;
+
+        },
+
+        //Napisz funkcje zmieniającą nazwe atrybutu w obiekcie
+        person: {firstName: "Jan", secondName: "Kowalski", age: 35},
+
+        changePropertyName: function (object, nameToChange, newName) {
+
+            var tmp;
+            tmp = object[nameToChange];
+            if (tmp != undefined) {
+                delete object[nameToChange];
+                object[newName] = tmp;
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+
+        //Napisz funckje zmieniajacą 2 wymiarowa tablice na obiekt, tablica postaci [n][2]
+        makeObject: function (list) {
+            var tmp = {};
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].length == 2) {
+                    tmp[list[i][0]] = list[i][1];
+                } else {
+                    return false;
+                }
+            }
+            return tmp;
         }
 
     }
