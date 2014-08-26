@@ -1,6 +1,5 @@
 /*global module*/
-module.exports = function (config)
-{
+module.exports = function (config) {
     'use strict';
     config.set({
 // enable / disable watching file and executing tests whenever any file changes
@@ -11,6 +10,7 @@ module.exports = function (config)
         frameworks: ['jasmine'],
 // list of files / patterns to load in the browser
         files: [
+            'bower_components/jquery/dist/jquery.js', 'bower_components/angular/angular.js', 'bower_components/angular-mocks/angular-mocks.js', 'test/testHelpers.js',
             'impl/**/*.js', 'test/spec/**/*.js'
         ],
 // list of files / patterns to exclude
@@ -19,7 +19,7 @@ module.exports = function (config)
 // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
         reporters: ['spec', 'coverage'],
         preprocessors: {
-            'app/**/*.js': 'coverage'
+            'impl/**/*.js': 'coverage'
         },
         coverageReporter: {
             dir: 'target/coverage/',
