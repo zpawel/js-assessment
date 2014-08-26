@@ -168,7 +168,107 @@
 
                 }
             };
+        }(),
+        ShoppingCart: function () {
+
+            var shoppingList = [];
+            var sumPrice = 0;
+            var sumTax = 0;
+
+            return{
+
+                addProduct: function (product, price, number, percentTax) {
+                    try {
+                        if ("string" == typeof product &&
+                            "number" == typeof price &&
+                            "number" == typeof number &&
+                            "number" == typeof percentTax) {
+
+                            shoppingList.push([product, price, number, percentTax]);
+                        } else {
+                            throw new TypeError();
+                        }
+                    } catch (error) {
+                        console.log("TypeError");
+                    }
+
+                },
+
+                getShoppingList: function () {
+                    return shoppingList;
+                },
+
+                getPrice: function () {
+                    return sumPrice;
+                },
+
+                getTax: function () {
+                    return sumTax;
+                },
+
+                emptyCart: function () {
+                    shoppingList = [];
+                },
+
+                countPrice: function () {
+                    sumPrice = 0;
+                    for (var i = 0, x = shoppingList.length; x > i; i++) {
+                        sumPrice += shoppingList[i][1] * shoppingList[i][2];
+                    }
+                    sumPrice = parseFloat(sumPrice.toFixed(2));
+                },
+
+                countTax: function () {
+                    sumTax = 0;
+                    for (var i = 0, x = shoppingList.length; x > i; i++) {
+                        sumTax += shoppingList[i][2] * (shoppingList[i][1] * (shoppingList[i][3] / 100));
+                    }
+                    sumTax = parseFloat(sumTax.toFixed(2));
+                },
+
+                searchProduct: function (name) {
+                    if ("string" == typeof name) {
+                        for (var i = 0, x = shoppingList.length; x > i; i++) {
+                            if (name == shoppingList[i][0]) {
+                                return i;
+                            }
+                        }
+                        return false;
+                    } else {
+                        return false;
+                    }
+                },
+
+                makeProductObject: function (index) {
+                    if (0 <= index && index < shoppingList.length) {
+                        return {name: shoppingList[index][0], price: shoppingList[index][1], amount: shoppingList[index][2], taxPercent: shoppingList[index][3]};
+                    } else {
+                        return false;
+                    }
+                },
+
+                deleteProduct: function (index) {
+                    if (0 <= index && index < shoppingList.length) {
+                        shoppingList.splice(index, 1);
+                    } else {
+                        return false;
+                    }
+
+                },
+
+                applyShopping: function () {
+                    this.countPrice();
+                    this.countTax();
+                    this.emptyCart();
+                    return sumPrice + sumTax;
+
+                }
+
+
+            }
+
         }()
-    }
+    };
+
 
 })();

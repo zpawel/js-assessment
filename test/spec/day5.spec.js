@@ -148,5 +148,260 @@ describe('day5', function () {
         });
     });
 
+    describe('ShoppingCart', function () {
+
+        afterEach(function () {
+            answer.ShoppingCart.emptyCart();
+        });
+
+        describe('getShoppingList', function () {
+            it('should return shopping list', function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7]
+                ]);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23]
+                ]);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23],
+                    ["butter", 2.5, 1, 8]
+                ]);
+            });
+
+        });
+
+        describe('addProduct', function () {
+
+            it('should add product to shopping list', function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7]
+                ]);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23]
+                ]);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23],
+                    ["butter", 2.5, 1, 8]
+                ]);
+
+            });
+
+            it('should not modified shopping list if type of parameters not match', function () {
+                answer.ShoppingCart.addProduct(2, 1.2, 2, 7);
+                expect(answer.ShoppingCart.getShoppingList()).not.toEqual([
+                    [2, 1.2, 2, 7]
+                ]);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([]);
+                answer.ShoppingCart.addProduct("milk", "1.2", 2, 7);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([]);
+                expect(answer.ShoppingCart.getShoppingList()).not.toEqual([
+                    ["milk", "1.2", 2, 7]
+                ]);
+                answer.ShoppingCart.addProduct("milk", 1.2, "one", 7);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([]);
+                expect(answer.ShoppingCart.getShoppingList()).not.toEqual([
+                    ["milk", 1.2, "one", 7]
+                ]);
+                answer.ShoppingCart.addProduct("milk", 1.2, 1, "tax free");
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([]);
+                expect(answer.ShoppingCart.getShoppingList()).not.toEqual([
+                    ["milk", 1.2, 1, "tax free"]
+                ]);
+            });
+        });
+
+        describe('countPrice', function () {
+
+            it('should count sum of price all product in shopping cart', function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.countPrice();
+                expect(answer.ShoppingCart.getPrice()).toEqual(2.4);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.countPrice();
+                expect(answer.ShoppingCart.getPrice()).toEqual(7.4);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                answer.ShoppingCart.countPrice();
+                expect(answer.ShoppingCart.getPrice()).toEqual(9.9);
+            });
+
+        });
+
+        describe('countTax', function () {
+
+            it('should count sum of tax all product in shopping cart', function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.countTax();
+                expect(answer.ShoppingCart.getTax()).toEqual(0.17);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.countTax();
+                expect(answer.ShoppingCart.getTax()).toEqual(1.32);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                answer.ShoppingCart.countTax();
+                expect(answer.ShoppingCart.getTax()).toEqual(1.52);
+            });
+
+        });
+
+        describe('searchProduct', function () {
+            beforeEach(function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+            });
+            it('should return index of product', function () {
+
+                expect(answer.ShoppingCart.searchProduct("apple")).toEqual(1);
+                expect(answer.ShoppingCart.searchProduct("milk")).toEqual(0);
+                expect(answer.ShoppingCart.searchProduct("butter")).toEqual(2);
+            });
+            it('should return false if product not exist', function () {
+
+                expect(answer.ShoppingCart.searchProduct("tea")).toBe(false);
+                expect(answer.ShoppingCart.searchProduct("flour")).toBe(false);
+                expect(answer.ShoppingCart.searchProduct("toy")).toBe(false);
+
+            });
+            it('should return false if name of product is not string', function () {
+
+                expect(answer.ShoppingCart.searchProduct(7)).toBe(false);
+                expect(answer.ShoppingCart.searchProduct(undefined)).toBe(false);
+                expect(answer.ShoppingCart.searchProduct(12.12)).toBe(false);
+
+            });
+
+        });
+
+        describe('makeProductObject', function () {
+
+            beforeEach(function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+            });
+
+            it('should return object from shopping list', function () {
+                expect(answer.ShoppingCart.makeProductObject(0)).toEqual({ name: 'milk', price: 1.2, amount: 2, taxPercent: 7});
+                expect(answer.ShoppingCart.makeProductObject(1)).toEqual({ name: 'apple', price: 0.5, amount: 10, taxPercent: 23});
+                expect(answer.ShoppingCart.makeProductObject(2)).toEqual({ name: 'butter', price: 2.5, amount: 1, taxPercent: 8});
+            });
+
+            it('should return false if index not exist', function () {
+                expect(answer.ShoppingCart.makeProductObject(3)).toBe(false);
+                expect(answer.ShoppingCart.makeProductObject(5)).toBe(false);
+                expect(answer.ShoppingCart.makeProductObject(10)).toBe(false);
+                expect(answer.ShoppingCart.makeProductObject(-1)).toBe(false);
+                expect(answer.ShoppingCart.makeProductObject(-3)).toBe(false);
+                expect(answer.ShoppingCart.makeProductObject(-7)).toBe(false);
+            });
+        });
+
+        describe('deleteProduct', function () {
+
+            beforeEach(function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                answer.ShoppingCart.addProduct("cake", 5, 2, 23);
+                answer.ShoppingCart.addProduct("beer", 2.5, 20, 8);
+                answer.ShoppingCart.addProduct("bread", 1.5, 2, 7);
+            });
+
+            it('should delete product from shopping list', function () {
+                answer.ShoppingCart.deleteProduct(4);
+                expect(answer.ShoppingCart.getShoppingList()).not.toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23],
+                    ["butter", 2.5, 1, 8],
+                    ["cake", 5, 2, 23],
+                    ["beer", 2.5, 20, 8],
+                    ["bread", 1.5, 2, 7]
+                ]);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["milk", 1.2, 2, 7],
+                    ["apple", 0.5, 10, 23],
+                    ["butter", 2.5, 1, 8],
+                    ["cake", 5, 2, 23],
+                    ["bread", 1.5, 2, 7]
+                ]);
+                answer.ShoppingCart.deleteProduct(0);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["apple", 0.5, 10, 23],
+                    ["butter", 2.5, 1, 8],
+                    ["cake", 5, 2, 23],
+                    ["bread", 1.5, 2, 7]
+                ]);
+                answer.ShoppingCart.deleteProduct(0);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["butter", 2.5, 1, 8],
+                    ["cake", 5, 2, 23],
+                    ["bread", 1.5, 2, 7]
+                ]);
+                answer.ShoppingCart.deleteProduct(2);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["butter", 2.5, 1, 8],
+                    ["cake", 5, 2, 23]
+                ]);
+                answer.ShoppingCart.deleteProduct(1);
+                expect(answer.ShoppingCart.getShoppingList()).toEqual([
+                    ["butter", 2.5, 1, 8]
+                ]);
+
+            });
+
+            it('should return false if index not exist', function () {
+                expect(answer.ShoppingCart.deleteProduct(6)).toBe(false);
+                expect(answer.ShoppingCart.deleteProduct(8)).toBe(false);
+                expect(answer.ShoppingCart.deleteProduct(10)).toBe(false);
+                expect(answer.ShoppingCart.deleteProduct(-1)).toBe(false);
+                expect(answer.ShoppingCart.deleteProduct(-3)).toBe(false);
+                expect(answer.ShoppingCart.deleteProduct(-7)).toBe(false);
+            });
+        });
+
+        describe('applyShopping', function () {
+
+            it('should call countPrice', function () {
+                spyOn(answer.ShoppingCart, 'countPrice');
+                answer.ShoppingCart.applyShopping();
+                expect(answer.ShoppingCart.countPrice).toHaveBeenCalled();
+            });
+
+            it('should call countTax', function () {
+                spyOn(answer.ShoppingCart, 'countTax');
+                answer.ShoppingCart.applyShopping();
+                expect(answer.ShoppingCart.countTax).toHaveBeenCalled();
+            });
+
+            it('should call emptyCart', function () {
+                spyOn(answer.ShoppingCart, 'emptyCart');
+                answer.ShoppingCart.applyShopping();
+                expect(answer.ShoppingCart.emptyCart).toHaveBeenCalled();
+            });
+
+            it('should return price with tax', function () {
+                answer.ShoppingCart.addProduct("milk", 1.2, 2, 7);
+                answer.ShoppingCart.addProduct("apple", 0.5, 10, 23);
+                answer.ShoppingCart.addProduct("butter", 2.5, 1, 8);
+                answer.ShoppingCart.addProduct("cake", 5, 2, 23);
+                expect(answer.ShoppingCart.applyShopping()).toEqual(23.72);
+                answer.ShoppingCart.addProduct("beer", 2.5, 20, 8);
+                answer.ShoppingCart.addProduct("bread", 1.5, 2, 7);
+                expect(answer.ShoppingCart.applyShopping()).toEqual(57.21);
+            });
+        });
+
+
+    });
+
 
 });
