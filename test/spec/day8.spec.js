@@ -56,4 +56,87 @@ describe("ShoppingCartCtrl", function () {
             expect(shoppingCart.cart).toEqual([]);
         });
     });
+
+
+    var controller;
+    var scope;
+
+    beforeEach(inject(function ($controller) {
+        scope = { firstName: 'Dawid',
+            lastName: 'Zegar',
+            pesel: '91030804353',
+            email: 'davvvid1@gmail.com'
+        };
+        controller = $controller('exerciseCtrl', {$scope: scope});
+
+        //spyOn(controller, 'checkEmail');
+
+
+    }));
+    describe('checkEmail', function () {
+        beforeEach(function () {
+            controller.checkEmail();
+        });
+        describe("define variable", function () {
+            it("should define person and personsList array", function () {
+                expect(controller.person).toBeDefined();
+                expect(controller.personsList).toBeDefined();
+            });
+        });
+        describe('return value', function () {
+
+            it('should return true if email has @', function () {
+                expect(controller.checkEmail()).toBe(true);
+            });
+            it('should return false if email don\'t has @', inject(function ($controller) {
+                scope.email = 'fakeEmail';
+                controller = $controller('exerciseCtrl', {$scope: scope});
+                expect(controller.checkEmail()).toBe(false);
+            }));
+
+        });
+    });
+    describe("checkPesel", function () {
+        beforeEach(function () {
+            controller.checkPesel();
+        });
+        it("should return true if sumcheck is valid", function () {
+            expect(controller.checkPesel()).toBe(true);
+        });
+        it('should return false if sumcheck is invalid', inject(function ($controller) {
+            scope.pesel = '22233344455';
+            controller = $controller('exerciseCtrl', {$scope: scope});
+            expect(controller.checkPesel()).toBe(false);
+        }));
+    });
+    describe("addPerson", function () {
+        beforeEach(function () {
+            controller.addPerson();
+        });
+        it("should modify personsList array", inject(function ($controller) {
+            expect(controller.personsList[0]).toEqual(scope);
+            scope = { firstName: 'Jan',
+                lastName: 'Kowalski',
+                pesel: '76010314752',
+                email: 'mailik@gmail.com'
+            };
+            controller = $controller('exerciseCtrl', {$scope: scope});
+            controller.addPerson()
+            expect(controller.personsList).toEqual([
+                { firstName: 'Jan', lastName: 'Kowalski', pesel: '76010314752', email: 'mailik@gmail.com'}
+            ]);
+        }));
+        it("should'n modify personsList array if data isn't valid", inject(function ($controller) {
+            expect(controller.personsList[0]).toEqual(scope);
+            scope = { firstName: 'Jan',
+                lastName: 'Kowalski',
+                pesel: '76010314752',
+                email: 'gmail.com'
+            };
+            controller = $controller('exerciseCtrl', {$scope: scope});
+            controller.addPerson()
+            expect(controller.personsList).toEqual([]);
+        }));
+    });
 });
+
