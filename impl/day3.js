@@ -1,8 +1,16 @@
-(function () {
+(function countVowels() {
     'use strict';
 
     // You can extend prototypes there.
+  Number.prototype.maxValueFromTwoArguments = function(arg0, arg1) {
 
+                  if(this > arg0 && this > arg1) {
+                  return this;
+                  }
+                else if(arg0>arg1 && arg0>this) return arg0;
+                else if(arg1>arg0 && arg1> this) return arg1;
+
+            }
     window.day3 = {
         aqurium: {
             fish1: {type: 'fish', name: 'Bibo', weight: 20, sizeFish: 'big' },

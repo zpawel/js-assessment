@@ -20,7 +20,7 @@
         "url": "https://github.com/it-crowd/js-assessment.git"
     },
     "scripts": {
-        "start": "node_modules/karma/bin/karma start test/karma.conf.js",
-        "test": "node_modules/karma/bin/karma start test/karma.conf.js --singleRun true"
+        "start": "node node_modules/karma/bin/karma start test/karma.conf.js",
+        "test": "node node_modules/karma/bin/karma start test/karma.conf.js --singleRun true"
     }
 }
