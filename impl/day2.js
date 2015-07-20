@@ -1,53 +1,164 @@
 (function () {
     'use strict';
 
-    window.day1 = {
-
-    function getDescendingNumbers(numberFrom, numberTo){
-        if(numberFrom>numberTo){
-            var i;
-            for (i=numberFrom;i>=numberTo;i--)
-               return(i + " ");
-        }else
-            return("numberFrom powinno byæ wiêksze od nubmerTo");
-    }
-
-    function deleteStr(stringToDelete, arrayOfStrings){
-        var i;
-        for(i=0;i<arrayOfStrings.length;i++){
-            if (arrayOfStrings[i]==stringToDelete)
-        		arrayOfStrings.splice(i,1);
-        }
-    }
-
-    function stringCounter(customArray){
-        var x = 0;
-        for (var obj of customArray){
-            if(typeof(obj) == 'string')
-                x++;
-        }
-       return(x);
-    };
-
-    function squareOdd(customArray){
-    	var i=0;
-    	for(i=0;i<customArray.length;i++){
-    		if(customArray[i]%2 == 0){
-    			customArray[i] = Math.pow(customArray[i],2)
-    		}
-    	}
-       	return(customArray);
-    }
-
-    function trapezeSquare(a,b,h){
-    	var x = h * ( a + b ) / 2;
-    	return(x);
-    }
-})();
-
-
-
     window.day2 = {
+
+    createArrayObject: function(firstObject, secondObject, thirdObject){
+
+        var obj = {property1: firstObject,property2: secondObject, property3: thirdObject};
+
+
+        return obj;
+
+    },
+    testIsAnyReturnFunction: function(condition)
+
+    {
+        if(condition === true)return true;
+        else return undefined;
+    },
+
+    arrayFunction: function (array){
+    	for(var i=0;i<array.length;i++){
+    		if(array[i]%2==1)
+    			array[i] = Math.pow(array[i],2);
+    		else
+    			array[i] = Math.pow(array[i],3);
+    	}
+    	return array;
+    },
+
+
+
+    swapString: function (arr, stringToSearch, changeString){
+            	var i;
+            	var x=0;
+            	for(i=0;i<arr.length;i++){
+            		if(arr[i]===stringToSearch){
+            	        arr[i] = changeString;
+            		    x++;
+            		}
+            	}
+            	if(x!==0) return arr;
+            	else return false;
+            },
+//
+    multiplyElementOfArray: function (array){
+        var i;
+        for(i=0; i<array.length; i++){
+            if(typeof(array[i]) == 'number'){
+                if(array[i]%2==0)
+                    array[i] = array[i] * 3;
+                else
+                    array[i] = array[i] * 4;
+            }
+        }
+        return array;
+    },
+//
+    maxArray: function (arr){
+    	var i;
+    	var max = arr[1];
+
+
+
+    	for(i=0;i<arr.length;i++){
+    		if(typeof(arr[i]) !== 'number')return false;
+    			else if(arr[i] > max)max = arr[i];
+    	}
+    	return max;
+
+    },
+//
+    getObject: function (list, name){
+    var i;
+        for(i=0;i<list.length;i++)
+        {
+            if(list[i].name == name)
+                return list[i];
+
+        }
+    },
+//
+//
+    doAdult: function (peopleArray){
+    var i;
+        for(i=0;i<peopleArray.length;i++)
+        {
+            if(peopleArray[i].age < 18)peopleArray[i].age = 18;
+        }
+        return peopleArray;
+
+    },
+//
+//
+//
+     findTheBiggerBox: function(x, y, z){
+
+    var capacity = 0;
+    var max = 0;
+    var numberOfBox = 0;
+    var i;
+
+    var boxes=[ {  bX: 3 * x,  bY:y,      bZ:z},
+                {  bX: x,      bY:y * y,  bZ:z},
+                {  bX: x,      bY: y,     bZ: y + z}];
+
+                for(i=0;i<boxes.length;i++)
+                {
+                    capacity = boxes[i].bX * boxes[i].bY * boxes[i].bZ;
+                    if(max<capacity) {
+                    	max = capacity;
+                     	numberOfBox = i + 1;
+                	}
+                }
+                return numberOfBox;
+    },
+//
+//
+//
+//
+    makePerson: function (firstName,lastName,age){
+    	var person = {
+    		firstName: firstName,
+    		lastName: lastName,
+    		age: age,
+    	};
+    	return person;
+    },
+//
+    invertString: function (str){
+    var i;
+    	var str2 = '';
+    	for (i=(str.length);i>0;i--){
+    		str2 += str[i-1];
+    	}
+    	return str2;
+    },
+//
+    factorial: function (num){
+    	var j = 1,i;
+    	var arr = [];
+    	arr[0] = 1;
+    	for(i=1;i<=num;i++){
+    		j = j * i;
+    		arr[i] = j;
+
+    	}
+        return arr;
+    },
+//
+    sumObject: function (objectWithNumbers)
+    {
+        var sum = 0;
+        for (var property in objectWithNumbers) {
+            if (objectWithNumbers.hasOwnProperty(property))
+            {
+               sum += objectWithNumbers[property]
+            }
+        }
+        return sum;
+    }
 
     };
 })();

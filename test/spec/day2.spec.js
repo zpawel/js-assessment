@@ -45,7 +45,7 @@ describe('day2', function () {
         });
 
         it('should return  array with multiply numbers elements and unchanged string element when input is a string and number array', function () {
-            expect(answer.multiplyElementOfArray(["a", 2, "c", 3])).toEqual(["a", 8, "c", 12]);
+            expect(answer.multiplyElementOfArray(["a", 2, "c", 3])).toEqual(["a", 6, "c", 12]);
         });
 
     });
