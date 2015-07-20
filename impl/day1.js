@@ -3,18 +3,24 @@
 
     window.day1 = {
 
-    function getDescendingNumbers(numberFrom, numberTo){
-        if(numberFrom>numberTo){
-            var i;
-            var j;
-            for (i=numberFrom;i>=numberTo;i--)
-            {
-               j = (i);
-              }
-               return j;
-        }else
-            return ("numberFrom powinno byæ wiêksze od nubmerTo");
-    }
+    getDescendingNumbers: function(numberFrom, numberTo){
+                   if(numberFrom>numberTo && typeof(numberFrom)!=='string'){
+                       var i;
+                       var j = '';
+                       for (i=numberFrom;i>=numberTo;i--)
+                       {
+                           if(i===numberTo)
+                           {
+                               j+= i;
+                           }
+                           else
+                          j += i + ' ';
+                         }
+
+                          return j;
+                   }else
+                       return false;
+               },
 
 //    function deleteStr(stringToDelete, arrayOfStrings){
 //        var i;
@@ -22,7 +28,7 @@
 //            if (arrayOfStrings[i]==stringToDelete)
 //        		arrayOfStrings.splice(i,1);
 //        }
-//    }
+//    },
 //
 //    function stringCounter(customArray){
 //        var x = 0;
@@ -31,7 +37,7 @@
 //                a++;
 //        }
 //        console.log(x);
-//    };
+//    },
 //
 //    function squareOdd(customArray){
 //    	var i=0;
@@ -41,11 +47,11 @@
 //    		}
 //    	}
 //       	console.log(customArray);
-//    }
+//    },
 //
 //    function trapezeSquare(a,b,h){
 //    	var x = h * ( a + b ) / 2;
 //    	console.log(x);
-//    }
-//})();
-//
+// }
+   }
+})();
