@@ -42,11 +42,6 @@
 
     }
 
-
-
-
-
-
     window.day3 = {
         aqurium: {
             fish1: {type: 'fish', name: 'Bibo', weight: 20, sizeFish: 'big' },
@@ -89,8 +84,18 @@
             return array;
 
 
-        }
+        },
+        mergeObject: function(mergeTo, mergeFrom){
+            for(var x in mergeFrom) {
+                    if (typeof mergeTo === 'object' &&  typeof mergeFrom === 'object') {
+                        mergeTo[x] = mergeFrom[x];
+                    }
+                    else
+                    return false;
+                }
 
+            return mergeTo;
+        }
 
 
     }

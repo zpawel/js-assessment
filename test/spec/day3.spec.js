@@ -30,7 +30,7 @@
 
 
         });
-        describe('mergeObject', function () {
+        ddescribe('mergeObject', function () {
             it('should return one object cointins all atributes', function () {
                 expect(answer.mergeObject({name: "Jan", age: 34}, {title: "Kot w butach", comments: "Good book!"})).toEqual({ name: 'Jan', age: 34, title: 'Kot w butach', comments: 'Good book!' });
             });
