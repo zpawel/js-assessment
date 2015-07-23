@@ -30,7 +30,7 @@
 
 
         });
-        ddescribe('mergeObject', function () {
+        describe('mergeObject', function () {
             it('should return one object cointins all atributes', function () {
                 expect(answer.mergeObject({name: "Jan", age: 34}, {title: "Kot w butach", comments: "Good book!"})).toEqual({ name: 'Jan', age: 34, title: 'Kot w butach', comments: 'Good book!' });
             });
@@ -120,7 +120,7 @@
 
         });
 
-        describe('getMaxVolume', function () {
+        ddescribe('getMaxVolume', function () {
             it('should max volume from array contains boxes', function () {
                 expect(answer.getMaxVolume(answer.boxlist)).toEqual(350);
             });
