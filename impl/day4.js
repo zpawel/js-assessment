@@ -1,7 +1,41 @@
 (function () {
     'use strict';
-    
+
     // Your implementations here
+    Boxes.prototype = {
+        addBoxes: function(content){
+            if(typeof content === 'string'){
+                this.inBoxes.push(content);
+            }else{
+                this.inBoxes = this.inBoxes.concat(content);
+            }
+        }
+    };
+
+    function Boxes(length, width, weight){
+        this.length = length;
+        this.width = width;
+        this.weight = weight;
+        this.inBoxes = [];
+        this.toStringBoxes = function(){
+            if(this.inBoxes.length > 0){
+                return 'Inside this boxes is: ' + this.inBoxes.join()+',';
+            }
+            else {
+                return 'This box is empty';
+            }
+        };
+        this.emptyBoxes = function(){
+            this.inBoxes = '';
+        };
+    }
+
+
+
+    function Car(maxWeightTransport, maxSquareTransport){
+        this.maxWeightTransport = maxWeightTransport;
+        this.maxSquareTransport = maxSquareTransport;
+    }
 
     window.day4 = {
         mbox1: new Boxes(10, 10, 10),
@@ -18,10 +52,12 @@
         car5: new Car(10, 6),
         car6: new Car(50, 20),
 
-        student1: new Student("Dawid Zegar", 23),
-        student2: new Student("Jan Kowalski", 77),
-        student3: new Student("Jacek Nowak", 34)
+        //student1: new Student("Dawid Zegar", 23),
+        //student2: new Student("Jan Kowalski", 77),
+        //student3: new Student("Jacek Nowak", 34)
 
         // Place getBestStudent here
+
+
     };
 })();
