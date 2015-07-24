@@ -120,7 +120,7 @@
 
         });
 
-        ddescribe('getMaxVolume', function () {
+        describe('getMaxVolume', function () {
             it('should max volume from array contains boxes', function () {
                 expect(answer.getMaxVolume(answer.boxlist)).toEqual(350);
             });

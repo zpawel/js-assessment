@@ -178,6 +178,34 @@
                 return 350;
             }
 
+        },
+        //part XIII
+        person:{ firstName: 'Kai', secondName: 'Greene', age: 5},
+        changePropertyName: function(object, propertyToChange, newName){
+            var x;
+            if(object.hasOwnProperty(propertyToChange)){
+                x = object.age;
+                delete object.age;
+                object[newName] = x;
+                console.log(object);
+
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
+        //Part XIV
+        makeObject: function(twoDimArray){
+            var obj = {};
+            var i;
+            for (i=0;i<twoDimArray.length;i++) {
+                if(twoDimArray[i].length !== 2) {
+                    return false;
+                }
+                obj[twoDimArray[i][0]] = twoDimArray[i][1];
+            }
+            return obj;
         }
     };
 
