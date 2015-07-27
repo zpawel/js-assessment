@@ -12,21 +12,31 @@
         }
     };
 
-    function Boxes(length, width, weight){
+    function Boxes(length, width, weight) {
         this.length = length;
         this.width = width;
         this.weight = weight;
         this.inBoxes = [];
-        this.toStringBoxes = function(){
-            if(this.inBoxes.length > 0){
-                return 'Inside this boxes is: ' + this.inBoxes.join()+',';
+        this.toStringBoxes = function () {
+            if (this.inBoxes.length > 0) {
+                return 'Inside this boxes is: ' + this.inBoxes.join() + ',';
             }
             else {
                 return 'This box is empty';
             }
         };
-        this.emptyBoxes = function(){
+        this.emptyBoxes = function () {
             this.inBoxes = '';
+        };
+        this.squareBoxes = function () {
+            return this.width * this.length;
+        };
+        this.transportBoxes = function (car) {
+            if (Car.maxSquareTransport >= this.squareBoxes && Car.maxWeightTransport >= this.weight) {
+                return "This car can transport this boxes";
+            } else {
+                return "This car can't transport this boxes";
+            }
         };
     }
 
